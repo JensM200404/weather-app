@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import { fetchWeatherByCity } from '../pages/api/weather';
 
 export default function CitySelector({ setWeatherData }) {
   const [city, setCity] = useState('');
@@ -7,10 +7,10 @@ export default function CitySelector({ setWeatherData }) {
   const handleCityChange = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`/api/weather?city=${city}`);
-      setWeatherData(response.data); 
+      const data = await fetchWeatherByCity(city);
+      setWeatherData(data);
     } catch (error) {
-      console.error('Error fetching weather data', error);
+      console.error('Error fetching weather data:', error);
     }
   };
 
