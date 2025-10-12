@@ -1,10 +1,29 @@
 const getWeatherData = async (city) => {
-  return {
-    name: city || "Mock City",
-    main: { temp: 22.5, humidity: 60 },
-    weather: [{ description: "clear sky" }],
-    wind: { speed: 3.6 },
-  };
+  const apiKey = process.env.WEATHER_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("OpenWeather API key is not configured");
+  }
+
+  if (!city) {
+    throw new Error("City name is required");
+  }
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+    city
+  )}&appid=${apiKey}&units=metric`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      throw new Error("City not found");
+    }
+    throw new Error(`Weather API error: ${response.status}`);
+  }
+
+  const weatherData = await response.json();
+  return weatherData;
 };
 
 module.exports = { getWeatherData };
