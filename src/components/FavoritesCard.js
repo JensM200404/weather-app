@@ -2,7 +2,11 @@
 
 import { Star } from "lucide-react";
 
-export default function FavoritesCard({ favorites, removeFavorite }) {
+export default function FavoritesCard({
+  favorites,
+  removeFavorite,
+  onCityClick,
+}) {
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8">
       <div className="flex items-center gap-2 mb-6">
@@ -24,12 +28,17 @@ export default function FavoritesCard({ favorites, removeFavorite }) {
           {favorites.map((city) => (
             <li
               key={city}
-              className="text-gray-900 flex justify-between items-center p-3 rounded border border-gray-300 bg-gray-50 font-medium"
+              className="flex justify-between items-center p-3 rounded border border-gray-300 bg-gray-50 font-medium"
             >
-              {city}
+              <button
+                onClick={() => onCityClick(city)}
+                className="text-left text-blue-600 hover:underline flex-grow"
+              >
+                {city}
+              </button>
               <button
                 onClick={() => removeFavorite(city)}
-                className="text-red-500 hover:text-red-700 font-bold"
+                className="text-red-500 hover:text-red-700 font-bold ml-3"
                 aria-label={`Remove ${city} from favorites`}
               >
                 &times;

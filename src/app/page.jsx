@@ -1,14 +1,24 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Cloud } from 'lucide-react';
-import SearchWeatherCard from '../components/SearchWeatherCard';
-import FavoritesCard from '../components/FavoritesCard';
-import { useFavorites } from '../localstorage/favoritesContext';
+import { useState } from "react";
+import { Cloud } from "lucide-react";
+import SearchWeatherCard from "../components/SearchWeatherCard";
+import FavoritesCard from "../components/FavoritesCard";
+import { useFavorites } from "../localstorage/favoritesContext";
+import { fetchWeatherByCity } from "../pages/api/weather";
 
 export default function Dashboard() {
   const [weatherData, setWeatherData] = useState(null);
   const { favorites, addFavorite, removeFavorite } = useFavorites();
+
+  const handleCityClick = async (city) => {
+    try {
+      const data = await fetchWeatherByCity(city);
+      setWeatherData(data);
+    } catch (error) {
+      console.error("Failed to fetch weather for city:", city, error);
+    }
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
@@ -16,9 +26,13 @@ export default function Dashboard() {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-3 mb-4">
             <Cloud className="w-12 h-12 text-blue-600" />
-            <h1 className="text-4xl font-bold text-gray-900">Weather Dashboard</h1>
+            <h1 className="text-4xl font-bold text-gray-900">
+              Weather Dashboard
+            </h1>
           </div>
-          <p className="text-gray-600">Get real-time weather information for any city</p>
+          <p className="text-gray-600">
+            Get real-time weather information for any city
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -28,7 +42,11 @@ export default function Dashboard() {
             favorites={favorites}
             addFavorite={addFavorite}
           />
-          <FavoritesCard favorites={favorites} removeFavorite={removeFavorite} />
+          <FavoritesCard
+            favorites={favorites}
+            removeFavorite={removeFavorite}
+            onCityClick={handleCityClick}
+          />
         </div>
       </div>
     </main>
