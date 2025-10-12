@@ -1,21 +1,15 @@
 const express = require('express');
 const cors = require('cors');
+const weatherRoutes = require('./routes/weatherRoutes');
 
 const app = express();
 const PORT = 5001;
 
 app.use(cors());
+app.use(express.json());
 
-app.get('/weather', (req, res) => {
-  const { city } = req.query;
-  res.status(200).json({
-    name: city || 'Mock City',
-    main: { temp: 22.5, humidity: 60 },
-    weather: [{ description: 'clear sky' }],
-    wind: { speed: 3.6 },
-  });
-});
+app.use('/weather', weatherRoutes);
 
 app.listen(PORT, () => {
-  console.log(`✅ Backend running at http://localhost:${PORT}`);
+  console.log(`✅ Server running at http://localhost:${PORT}`);
 });
