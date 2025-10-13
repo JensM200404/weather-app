@@ -49,7 +49,7 @@ export default function Dashboard() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           <SearchWeatherCard
             weatherData={weatherData}
             setWeatherData={setWeatherData}

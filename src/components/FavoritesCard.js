@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Star } from "lucide-react";
 
 export default function FavoritesCard({
@@ -7,12 +8,29 @@ export default function FavoritesCard({
   removeFavorite,
   onCityClick,
 }) {
+  const [filter, setFilter] = useState("");
+
+  const filteredFavorites = favorites.filter((city) =>
+    city.toLowerCase().includes(filter.toLowerCase())
+  );
+
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8">
       <div className="flex items-center gap-2 mb-6">
         <Star className="w-6 h-6 text-yellow-500" />
         <h2 className="text-xl font-semibold text-gray-900">Favorite Cities</h2>
       </div>
+
+      {favorites.length > 0 && (
+        <input
+          type="text"
+          placeholder="Filter cities..."
+          className="mb-4 w-full p-2 border border-gray-300 rounded text-gray-900"
+          onChange={(e) => setFilter(e.target.value)}
+          value={filter}
+        />
+      )}
+
       {favorites.length === 0 ? (
         <div className="text-center py-12">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
@@ -23,9 +41,11 @@ export default function FavoritesCard({
             Search for cities to add them to your favorites
           </p>
         </div>
+      ) : filteredFavorites.length === 0 ? (
+        <p className="text-gray-500 italic">No cities match your search.</p>
       ) : (
-        <ul className="space-y-3">
-          {favorites.map((city) => (
+        <ul className="space-y-3 max-h-82  overflow-y-auto pr-2">
+          {filteredFavorites.map((city) => (
             <li
               key={city}
               className="flex justify-between items-center p-3 rounded border border-gray-300 bg-gray-50 font-medium"
