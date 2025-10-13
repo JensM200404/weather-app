@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+### Setting up backend
+
+- First, clone the repo in a folder to your wish
+
+- Navigate to weather-app/backend. In this folder create a file named .env with the following:
+
+```
+WEATHER_API_KEY=your given api key
+NODE_ENV=development
+PORT=5001
+NEXT_PUBLIC_BACKEND_URL=http://localhost:5001
+```
+
+- Next, use this to install necessary packages
+
+```bash
+npm install
+```
+
+- Run backend with:
+
+```bash
+node server.js
+```
+
+- **Remember**: this needs to run togheter with the frontend for the application to work
+
+### Setting up frontend
+
+- Navigate to root file /weather-app
+- Next, use this to install necessary packages
+
+```bash
+npm install
+```
+
+- Run backend using:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Finally** go to http://localhost:3000 and enjoy the app!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How to use weather-app
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Searching weather by city
 
-## Learn More
+- Use the searchbar to search for any city, by pressing the search button, you can see the details.
 
-To learn more about Next.js, take a look at the following resources:
+### Adding favorites
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- When searching for a city, a button appears underneath the detatils. Use this button to add the city to your favorites. You will know it worked once a popup appears.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Using the map
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- When adding cities to your favorites, the current weather condition of that city appears on the location on the map.
+- Click on the weather icon, on the city, to view some details.
