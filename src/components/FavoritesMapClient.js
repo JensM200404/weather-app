@@ -89,7 +89,7 @@ export default function FavoritesMap({ favorites, units }) {
                 <img
                   src={`http://openweathermap.org/img/wn/${marker.icon}@2x.png`}
                   alt={marker.description}
-                  className="mx-auto w-12 h-12"
+                  className="mx-auto w-12 h-12 animate-bounce"
                 />
                 <p className="text-gray-700 capitalize">{marker.description}</p>
                 <p className="font-bold text-lg">
