@@ -1,7 +1,7 @@
 const { getWeatherData } = require("../services/WeatherService");
 const logger = require("../utils/logger");
 
-const getWeather = async (req, res) => {
+const getWeather = async (req, res, next) => {
   try {
     const { city, units } = req.query;
 
@@ -24,15 +24,7 @@ const getWeather = async (req, res) => {
       stack: error.stack,
     });
 
-    if (error.message === "City not found") {
-      return res.status(404).json({ error: "City not found" });
-    }
-
-    if (error.message.includes("API key")) {
-      return res.status(500).json({ error: "Server configuration error" });
-    }
-
-    res.status(500).json({ error: "Failed to fetch weather data" });
+    next(error);
   }
 };
 
