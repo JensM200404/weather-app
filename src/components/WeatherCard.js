@@ -24,7 +24,13 @@ export default function WeatherCard({ weather, units }) {
           <h3 className="text-2xl font-bold text-gray-900">{name}</h3>
           <p className="text-sm text-gray-600 capitalize mt-1">{description}</p>
         </div>
-        <img src={iconUrl} alt={description} className="w-20 h-20" />
+        <div className="w-20 h-20 rounded-full flex items-center justify-center shadow-md bg-gradient-to-tr from-blue-100 to-indigo-200">
+          <img
+            src={iconUrl}
+            alt={description}
+            className="w-16 h-16 weather-icon-animated"
+          />
+        </div>
       </div>
 
       <div className="text-5xl font-bold text-gray-900 mb-6">

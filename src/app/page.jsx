@@ -6,6 +6,7 @@ import SearchWeatherCard from "../components/SearchWeatherCard";
 import FavoritesCard from "../components/FavoritesCard";
 import { useFavorites } from "../context/favoritesContext";
 import { fetchWeatherByCity } from "../pages/api/weather";
+import FavoritesMap from "../components/FavoritesMap";
 
 export default function Dashboard() {
   const [weatherData, setWeatherData] = useState(null);
@@ -64,6 +65,7 @@ export default function Dashboard() {
             onCityClick={handleCityClick}
           />
         </div>
+        <FavoritesMap favorites={favorites} units={units} />
       </div>
     </main>
   );

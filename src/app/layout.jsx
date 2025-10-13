@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "leaflet/dist/leaflet.css";
 import { FavoritesProvider } from "../context/favoritesContext";
 
 const geistSans = Geist({
