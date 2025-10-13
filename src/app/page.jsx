@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Cloud } from "lucide-react";
 import SearchWeatherCard from "../components/SearchWeatherCard";
 import FavoritesCard from "../components/FavoritesCard";
-import UnitToggle from "../components/UnitToggle";
 import { useFavorites } from "../context/favoritesContext";
 import { fetchWeatherByCity } from "../pages/api/weather";
 
@@ -48,9 +47,6 @@ export default function Dashboard() {
           <p className="text-gray-600 mb-4">
             Get real-time weather information for any city
           </p>
-          <div className="flex justify-center">
-            <UnitToggle units={units} setUnits={handleUnitChange} />
-          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -60,6 +56,7 @@ export default function Dashboard() {
             favorites={favorites}
             addFavorite={addFavorite}
             units={units}
+            setUnits={handleUnitChange}
           />
           <FavoritesCard
             favorites={favorites}

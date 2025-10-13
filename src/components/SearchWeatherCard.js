@@ -2,6 +2,7 @@
 
 import CitySelector from "../components/CitySelector";
 import WeatherCard from "../components/WeatherCard";
+import UnitToggle from "../components/UnitToggle";
 
 export default function SearchWeatherCard({
   weatherData,
@@ -9,13 +10,17 @@ export default function SearchWeatherCard({
   favorites,
   addFavorite,
   units,
+  setUnits,
 }) {
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8">
-      <h2 className="text-xl font-semibold text-gray-900 mb-6">
-        Search Weather
-      </h2>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-xl font-semibold text-gray-900">Search Weather</h2>
+        <UnitToggle units={units} setUnits={setUnits} />
+      </div>
+
       <CitySelector setWeatherData={setWeatherData} units={units} />
+
       {weatherData && (
         <>
           <WeatherCard weather={weatherData} units={units} />

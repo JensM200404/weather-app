@@ -41,7 +41,7 @@ export default function CitySelector({ setWeatherData, units }) {
         />
         <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
         <button
-          className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center gap-2 rounded-lg bg-blue-600 py-2 px-4 text-sm font-medium text-white transition-all duration-200 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center gap-2 rounded-lg bg-blue-600 py-2 px-4 text-sm font-medium text-white transition-all duration-200 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:scale-95 disabled:cursor-not-allowed"
           type="button"
           onClick={handleCityChange}
           disabled={!city.trim() || isLoading}
