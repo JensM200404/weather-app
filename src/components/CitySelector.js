@@ -20,7 +20,6 @@ export default function CitySelector({ setWeatherData, units }) {
       setWeatherData(data);
       setCity("");
     } catch (error) {
-      console.error("Error fetching weather data:", error);
       setError(error.message);
     } finally {
       setIsLoading(false);

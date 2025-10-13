@@ -1,3 +1,5 @@
+const logger = require("../utils/logger");
+
 const getWeatherData = async (city, units = "metric") => {
   const apiKey = process.env.WEATHER_API_KEY;
 
@@ -13,16 +15,26 @@ const getWeatherData = async (city, units = "metric") => {
     city
   )}&appid=${apiKey}&units=${units}`;
 
+  logger.info(`Fetching weather data from OpenWeather API`, { city, units });
+
   const response = await fetch(url);
+  const weatherData = await response.json();
 
   if (!response.ok) {
+    logger.warn("OpenWeather API responded with an error", {
+      status: response.status,
+      response: weatherData,
+    });
+
     if (response.status === 404) {
       throw new Error("City not found");
     }
-    throw new Error(`Weather API error: ${response.status}`);
+
+    const errorMsg = weatherData.message || "Unknown weather API error";
+    throw new Error(`Weather API error: ${errorMsg}`);
   }
 
-  const weatherData = await response.json();
+  logger.debug("Weather API response", weatherData);
   return weatherData;
 };
 

@@ -12,18 +12,24 @@ export const fetchWeatherByCity = async (city, units = "metric") => {
     });
     return response.data;
   } catch (error) {
-    console.error("Weather API error:", error);
-
-    if (error.response) {
-      throw new Error(
-        error.response.data.error || "Failed to fetch weather data"
-      );
-    } else if (error.request) {
-      throw new Error(
-        "No response from server. Please check if backend is running."
-      );
-    } else {
-      throw new Error("Failed to fetch weather data");
+    if (!error.response) {
+      console.error("No response from server:", error);
+      throw new Error("No response from server. Is the backend running?");
     }
+
+    const status = error.response.status;
+    const message = error.response.data?.error || "Unexpected error occurred";
+
+    if (status === 404) {
+      throw new Error("City not found");
+    }
+
+    console.error("Unexpected error from backend:", {
+      status,
+      message,
+      fullError: error,
+    });
+
+    throw new Error(message);
   }
 };
