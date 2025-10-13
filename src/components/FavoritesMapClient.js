@@ -31,35 +31,34 @@ export default function FavoritesMap({ favorites, units }) {
   const [weatherMarkers, setWeatherMarkers] = useState([]);
 
   useEffect(() => {
-    const loadWeatherData = async () => {
-      const results = await Promise.all(
-        favorites.map(async (city) => {
-          try {
-            const data = await fetchWeatherByCity(city, units);
-            return {
-              city: data.name,
-              lat: data.coord.lat,
-              lon: data.coord.lon,
-              temp: data.main.temp,
-              description: data.weather[0].description,
-              icon: data.weather[0].icon,
-            };
-          } catch (error) {
-            console.error("Error fetching weather for map:", city, error);
-            return null;
-          }
-        })
-      );
-
-      setWeatherMarkers(results.filter((res) => res !== null));
-    };
-
     if (favorites.length > 0) {
+      const loadWeatherData = async () => {
+        const results = await Promise.all(
+          favorites.map(async (city) => {
+            try {
+              const data = await fetchWeatherByCity(city, units);
+              return {
+                city: data.name,
+                lat: data.coord.lat,
+                lon: data.coord.lon,
+                temp: data.main.temp,
+                description: data.weather[0].description,
+                icon: data.weather[0].icon,
+              };
+            } catch (error) {
+              console.error("Error fetching weather for map:", city, error);
+              return null;
+            }
+          })
+        );
+        setWeatherMarkers(results.filter((res) => res !== null));
+      };
+
       loadWeatherData();
+    } else {
+      setWeatherMarkers([]);
     }
   }, [favorites, units]);
-
-  if (weatherMarkers.length === 0) return null;
 
   return (
     <div className="mt-12 bg-white rounded-2xl shadow-xl p-6">
