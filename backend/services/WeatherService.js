@@ -1,7 +1,8 @@
 const logger = require("../utils/logger");
+const config = require("../config");
 
 const getWeatherData = async (city, units = "metric") => {
-  const apiKey = process.env.WEATHER_API_KEY;
+  const apiKey = config.weatherApiKey;
 
   if (!apiKey) {
     throw new Error("OpenWeather API key is not configured");

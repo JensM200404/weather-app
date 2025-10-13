@@ -4,9 +4,10 @@ const errorHandler = require("./middleware/errorHandler");
 const express = require("express");
 const cors = require("cors");
 const weatherRoutes = require("./routes/WeatherRoutes");
+const config = require("./config");
 
 const app = express();
-const PORT = 5001;
+const PORT = config.port;
 
 app.use(cors());
 app.use(express.json());
