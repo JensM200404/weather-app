@@ -34,3 +34,8 @@ body {
   filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.15));
   transition: filter 0.2s ease;
 }
+
+.leaflet-container {
+  position: relative !important;
+  z-index: 0 !important;
+}
