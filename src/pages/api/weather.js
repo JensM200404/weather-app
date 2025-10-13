@@ -2,9 +2,14 @@ import axios from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5001";
 
-export const fetchWeatherByCity = async (city) => {
+export const fetchWeatherByCity = async (city, units = "metric") => {
   try {
-    const response = await axios.get(`${BASE_URL}/api/weather?city=${city}`);
+    const response = await axios.get(`${BASE_URL}/api/weather`, {
+      params: {
+        city,
+        units,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Weather API error:", error);

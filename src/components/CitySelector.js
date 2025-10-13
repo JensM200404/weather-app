@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Search, MapPin } from "lucide-react";
 import { fetchWeatherByCity } from "../pages/api/weather";
 
-export default function CitySelector({ setWeatherData }) {
+export default function CitySelector({ setWeatherData, units }) {
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +16,7 @@ export default function CitySelector({ setWeatherData }) {
     setError("");
 
     try {
-      const data = await fetchWeatherByCity(city);
+      const data = await fetchWeatherByCity(city, units);
       setWeatherData(data);
       setCity("");
     } catch (error) {

@@ -8,16 +8,17 @@ export default function SearchWeatherCard({
   setWeatherData,
   favorites,
   addFavorite,
+  units,
 }) {
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8">
       <h2 className="text-xl font-semibold text-gray-900 mb-6">
         Search Weather
       </h2>
-      <CitySelector setWeatherData={setWeatherData} />
+      <CitySelector setWeatherData={setWeatherData} units={units} />
       {weatherData && (
         <>
-          <WeatherCard weather={weatherData} />
+          <WeatherCard weather={weatherData} units={units} />
           {!favorites.includes(weatherData.name) && (
             <button
               onClick={() => addFavorite(weatherData.name)}

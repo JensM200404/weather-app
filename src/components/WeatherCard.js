@@ -1,6 +1,6 @@
 import { Droplets, Wind, Thermometer } from "lucide-react";
 
-export default function WeatherCard({ weather }) {
+export default function WeatherCard({ weather, units }) {
   if (!weather) return null;
 
   const {
@@ -14,6 +14,9 @@ export default function WeatherCard({ weather }) {
   const iconCode = weatherDetails[0]?.icon || "01d";
   const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
+  const tempUnit = units === "metric" ? "°C" : "°F";
+  const speedUnit = units === "metric" ? "m/s" : "mph";
+
   return (
     <div className="mt-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
       <div className="flex items-center justify-between mb-4">
@@ -25,7 +28,8 @@ export default function WeatherCard({ weather }) {
       </div>
 
       <div className="text-5xl font-bold text-gray-900 mb-6">
-        {Math.round(temp)}°C
+        {Math.round(temp)}
+        {tempUnit}
       </div>
 
       <div className="grid grid-cols-3 gap-4">
@@ -37,7 +41,8 @@ export default function WeatherCard({ weather }) {
             </span>
           </div>
           <span className="text-lg font-semibold text-gray-900">
-            {Math.round(feels_like)}°C
+            {Math.round(feels_like)}
+            {tempUnit}
           </span>
         </div>
 
@@ -57,7 +62,7 @@ export default function WeatherCard({ weather }) {
             <span className="text-xs font-medium text-gray-600">Wind</span>
           </div>
           <span className="text-lg font-semibold text-gray-900">
-            {speed.toFixed(1)} m/s
+            {speed.toFixed(1)} {speedUnit}
           </span>
         </div>
       </div>

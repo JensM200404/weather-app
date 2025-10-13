@@ -2,13 +2,13 @@ const { getWeatherData } = require("../services/WeatherService");
 
 const getWeather = async (req, res) => {
   try {
-    const { city } = req.query;
+    const { city, units } = req.query;
 
     if (!city) {
       return res.status(400).json({ error: "City parameter is required" });
     }
 
-    const weatherData = await getWeatherData(city);
+    const weatherData = await getWeatherData(city, units || "metric");
     res.json(weatherData);
   } catch (error) {
     console.error("Error in getWeather:", error);

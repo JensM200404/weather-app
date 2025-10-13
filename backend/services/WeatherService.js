@@ -1,4 +1,4 @@
-const getWeatherData = async (city) => {
+const getWeatherData = async (city, units = "metric") => {
   const apiKey = process.env.WEATHER_API_KEY;
 
   if (!apiKey) {
@@ -11,7 +11,7 @@ const getWeatherData = async (city) => {
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
     city
-  )}&appid=${apiKey}&units=metric`;
+  )}&appid=${apiKey}&units=${units}`;
 
   const response = await fetch(url);
 
