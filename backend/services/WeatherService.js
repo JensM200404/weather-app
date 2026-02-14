@@ -1,5 +1,6 @@
 const logger = require("../utils/logger");
 const config = require("../config");
+const prisma = require("../config/prisma");
 
 const getWeatherData = async (city, units = "metric") => {
   const apiKey = config.weatherApiKey;
@@ -13,7 +14,7 @@ const getWeatherData = async (city, units = "metric") => {
   }
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
-    city
+    city,
   )}&appid=${apiKey}&units=${units}`;
 
   logger.info(`Fetching weather data from OpenWeather API`, { city, units });
@@ -36,6 +37,17 @@ const getWeatherData = async (city, units = "metric") => {
   }
 
   logger.debug("Weather API response", weatherData);
+
+  //insert all searches in db
+  await prisma.weatherSearch.create({
+    data: {
+      city,
+      units,
+      temperature: weatherData.main.temp,
+      weatherDescription: weatherData.weather[0].description,
+    },
+  });
+
   return weatherData;
 };
 
